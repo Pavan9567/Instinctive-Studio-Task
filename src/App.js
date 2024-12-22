@@ -1,44 +1,28 @@
-import { useEffect } from "react";
-import Header from "./components/Header";
-import Card from "./components/Card";
-import useStore from "./state/store";
-import UserCard from "./components/UserCard";
-import AddUserForm from "./components/AddUserForm";
-import AddItemForm from "./components/AddItemForm";
+import React from 'react';
+import Header from './components/Header';
+import AddUser from './components/AddUser';
+import UserList from './components/UserList';
+import AddItem from './components/AddItem';
+import ItemList from './components/ItemList';
 
-function App() {
-  const { users, fetchUsers, items, fetchItems } = useStore();
-
-  useEffect(() => {
-    fetchUsers();
-    fetchItems();
-  }, [fetchUsers, fetchItems]);
-
+const App = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Header />
-      <div className="container mx-auto p-6">
-        <section className="mb-12">
-        <h1 className="text-3xl font-bold mb-6">User List</h1>
-        <AddUserForm />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {users.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
+    <div className="min-h-screen bg-background font-sans p-6">
+      <div className="container-fluid mx-auto">
+        <Header />
+        <div className="grid grid-cols-2 gap-8 mt-2">
+          <div className="space-y-6">
+            <AddUser />
+            <UserList />
+          </div>
+          <div className="space-y-6">
+            <AddItem />
+            <ItemList />
+          </div>
         </div>
-        </section>
-        <section className="mb-12">
-        <h1 className="text-3xl font-bold mb-6">Item List</h1>
-        <AddItemForm />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-          {items.map((item) => (
-            <Card key={item.id} item={item} />
-          ))}
-        </div>
-        </section>
       </div>
     </div>
   );
-}
+};
 
 export default App;
